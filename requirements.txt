@@ -1,4 +1,5 @@
 anthropic
+asyncpg
 beautifulsoup4
 langchain
 langchain-community
@@ -20,3 +21,6 @@ fastapi
 uvicorn[standard]
 python-multipart
 rich
+groq
+pytest
+pytest-asyncio
