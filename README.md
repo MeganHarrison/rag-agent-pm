@@ -139,3 +139,5 @@ semantic_search_agent/
 ├── sql/              # Database schema
 └── documents/        # Sample documents
 ```
+
+

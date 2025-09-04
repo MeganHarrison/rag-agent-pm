@@ -9,8 +9,14 @@ pandas
 pgvector
 psycopg2-binary
 pydantic
+pydantic-ai
+pydantic-settings
 python-dotenv
 requests
 sqlalchemy
 tiktoken
 openai
+fastapi
+uvicorn[standard]
+python-multipart
+rich
