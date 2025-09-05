@@ -19,7 +19,18 @@ app = FastAPI(title="RAG Agent API", version="1.0.0")
 # Configure CORS for Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://*.vercel.app"],  # Add your Vercel domain
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001", 
+        "http://localhost:3002",
+        "http://localhost:3003",
+        "http://localhost:3004",
+        "http://localhost:3005",
+        "http://localhost:3006",
+        "https://alleato-ai-dashboard.vercel.app",
+        "https://rag-agent-chat.vercel.app",
+        "https://*.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
