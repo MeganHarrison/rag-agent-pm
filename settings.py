@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings
 from pydantic import Field, ConfigDict
 from dotenv import load_dotenv
 from typing import Optional
+import os
 
 # Load environment variables from .env file
 load_dotenv()
@@ -21,7 +22,7 @@ class Settings(BaseSettings):
     
     # Database Configuration
     database_url: str = Field(
-        ...,
+        default_factory=lambda: os.getenv("DATABASE_URL", ""),
         description="PostgreSQL connection URL with PGVector extension"
     )
     
@@ -32,7 +33,8 @@ class Settings(BaseSettings):
     )
     
     llm_api_key: str = Field(
-        ...,
+        default_factory=lambda: os.getenv("OPENAI_API_KEY", os.getenv("LLM_API_KEY", "")),
+        alias="OPENAI_API_KEY",
         description="API key for the LLM provider"
     )
     
