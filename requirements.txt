@@ -24,6 +24,7 @@ rich
 groq
 pytest
 pytest-asyncio
+aiohttp
 
 # Enhanced RAG dependencies
 nltk>=3.8
