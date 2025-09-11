@@ -53,8 +53,7 @@ COPY --chown=appuser:appuser . .
 # Set environment variables
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8000
+    PYTHONDONTWRITEBYTECODE=1
 
 # Initialize database schema if file exists
 RUN if [ -f "sql/unified_schema.sql" ]; then \
@@ -64,9 +63,9 @@ RUN if [ -f "sql/unified_schema.sql" ]; then \
 # Switch to non-root user
 USER appuser
 
-# Health check
+# Health check  
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:${PORT}/health || exit 1
+    CMD curl -f http://localhost:8000/health || exit 1
 
 # Expose port (informational)
 EXPOSE 8000

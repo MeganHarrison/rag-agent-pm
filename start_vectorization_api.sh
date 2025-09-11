@@ -48,5 +48,5 @@ if [ -f "sql/unified_schema.sql" ]; then
 fi
 
 # Start the vectorization API
-echo "Starting Vectorization API on port 8000..."
-uvicorn vectorization_api:app --host 0.0.0.0 --port 8000 --reload
+echo "Starting Vectorization API on port ${PORT:-8000}..."
+uvicorn vectorization_api:app --host 0.0.0.0 --port ${PORT:-8000} --reload
