@@ -64,3 +64,19 @@ dist/
 tmp/
 temp/
 .tmp/
+
+# Debug and test files
+debug_test.py
+test_search_tools.py
+test_railway_urls.sh
+test_pipeline.py
+*.tmp
+*.temp
+
+# Planning and development docs
+planning/
+frontend-example/
+
+# More specific test patterns
+*_test.py
+test_*.py

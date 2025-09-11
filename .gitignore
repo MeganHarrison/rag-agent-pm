@@ -73,3 +73,25 @@ instance/
 
 # Documents (temporarily excluded if they contain sensitive data)
 # documents/
+
+# Debug and temporary files
+debug_test.py
+test_search_tools.py
+test_railway_urls.sh
+test_pipeline.py
+*.tmp
+*.temp
+ingest_output.log
+
+# Archive and backup directories
+.archive/
+backup/
+old/
+temp/
+tmp/
+
+# Node modules (if any frontend components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

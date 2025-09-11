@@ -1,6 +1,6 @@
-# 🔍 Semantic Search Agent
+# 🔍 PM RAG Agent
 
-An intelligent knowledge base search system powered by Pydantic AI and PostgreSQL with PGVector. This agent provides both semantic and hybrid search capabilities with automatic strategy selection and result summarization.
+An intelligent project management knowledge base system powered by Pydantic AI and PostgreSQL with PGVector. This agent analyzes meeting transcripts, project documents, and provides strategic business insights.
 
 ## Features
 
