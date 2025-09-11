@@ -63,10 +63,7 @@ async def stream_response(
     """Stream agent responses as Server-Sent Events."""
     
     # Create and initialize dependencies
-    deps = AgentDependencies(
-        api_key=settings.llm_api_key,
-        session_id=session_id
-    )
+    deps = AgentDependencies(session_id=session_id)
     await deps.initialize()
     
     # Build context from conversation history
@@ -143,10 +140,7 @@ async def chat(request: ChatRequest):
     session_id = request.session_id or str(uuid.uuid4())
     
     # Create and initialize dependencies
-    deps = AgentDependencies(
-        api_key=settings.llm_api_key,
-        session_id=session_id
-    )
+    deps = AgentDependencies(session_id=session_id)
     await deps.initialize()
     
     # Build context
