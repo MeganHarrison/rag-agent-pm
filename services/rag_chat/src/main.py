@@ -9,7 +9,7 @@ import asyncio
 import json
 import uuid
 
-from services.rag-chat.src.rag_agent import search_agent
+from services.rag_chat.src.rag_agent import search_agent
 from shared.utils.db_utils import initialize_database
 from shared.utils.config import load_settings
 from pydantic_ai import Agent

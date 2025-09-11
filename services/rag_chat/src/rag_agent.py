@@ -15,7 +15,7 @@ from types import SimpleNamespace
 from shared.ai.providers import get_llm_model
 from shared.utils.db_utils import db_pool
 from shared.ai.prompts import ENHANCED_PM_SYSTEM_PROMPT, get_dynamic_prompt
-from services.rag-chat.src.tools.search_tools import semantic_search, hybrid_search, get_recent_documents
+from services.rag_chat.src.tools.search_tools import semantic_search, hybrid_search, get_recent_documents
 
 # Create dependencies object
 class AgentDeps:

@@ -26,8 +26,8 @@ RUN pip install --no-cache-dir \
     --progress-bar off \
     -r requirements.txt
 
-# Download NLTK data
-RUN python -c "import nltk; nltk.download('punkt')"
+# NLTK not used in microservices architecture
+# RUN python -c "import nltk; nltk.download('punkt')"
 
 # Production stage
 FROM python:3.11-slim
