@@ -14,7 +14,7 @@ from typing import Any
 from providers import get_llm_model
 from dependencies import AgentDependencies
 from core.prompts import ENHANCED_PM_SYSTEM_PROMPT, get_dynamic_prompt
-from tools.search_tools import semantic_search, hybrid_search
+from tools.search_tools import semantic_search, hybrid_search, get_recent_documents
 
 # Initialize the elite PM agent with enhanced system prompt
 search_agent = Agent(
@@ -32,3 +32,4 @@ async def add_dynamic_context(ctx: RunContext[AgentDependencies]) -> str:
 # Register enhanced search tools
 search_agent.tool(semantic_search)
 search_agent.tool(hybrid_search)
+search_agent.tool(get_recent_documents)

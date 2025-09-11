@@ -147,3 +147,62 @@ async def hybrid_search(
     except Exception as e:
         print(e)
         return f"Failed to perform hybrid search: {e}"
+
+
+async def get_recent_documents(
+    ctx: RunContext[AgentDependencies],
+    limit: int = 5,
+    document_type: Optional[str] = None
+) -> List[Dict[str, Any]]:
+    """
+    Get the most recent documents ordered by creation date.
+    
+    Args:
+        ctx: Agent runtime context with dependencies
+        limit: Number of recent documents to return (default: 5)
+        document_type: Optional filter by document type/category
+    
+    Returns:
+        List of recent documents ordered by date (newest first)
+    """
+    try:
+        deps = ctx.deps
+        
+        # Build query with optional type filter
+        base_query = """
+        SELECT id, title, created_at, source, metadata, summary, 
+               transcript_url, participants, duration_minutes, project
+        FROM documents 
+        """
+        
+        params = []
+        if document_type:
+            base_query += "WHERE category = $1 OR source = $1 "
+            params.append(document_type)
+        
+        base_query += "ORDER BY created_at DESC LIMIT $" + str(len(params) + 1)
+        params.append(limit)
+        
+        # Execute query
+        async with deps.db_pool.acquire() as conn:
+            results = await conn.fetch(base_query, *params)
+        
+        # Convert to dictionaries
+        return [
+            {
+                'id': str(row['id']),
+                'title': row['title'],
+                'created_at': row['created_at'].isoformat() if row['created_at'] else None,
+                'source': row['source'],
+                'metadata': row['metadata'] if row['metadata'] else {},
+                'summary': row['summary'],
+                'transcript_url': row['transcript_url'],
+                'participants': row['participants'] if row['participants'] else [],
+                'duration_minutes': row['duration_minutes'],
+                'project': row['project']
+            }
+            for row in results
+        ]
+    except Exception as e:
+        print(f"Error getting recent documents: {e}")
+        return []
