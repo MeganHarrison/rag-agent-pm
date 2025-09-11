@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # RAG Chat Service - Main user-facing API
+  rag-chat:
+    build: ./services/rag-chat
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CHAT_MODEL=${CHAT_MODEL:-gpt-4-turbo}
+    depends_on:
+      - vectorization
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # Vectorization Service - Document processing
+  vectorization:
+    build: ./services/vectorization
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-small}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+  # Insights Service - AI analysis and insights generation
+  insights:
+    build: ./services/insights
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - INSIGHTS_MODEL=${INSIGHTS_MODEL:-gpt-4}
+    depends_on:
+      - vectorization
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+
+# Optional: Add PostgreSQL if not using external Supabase
+# Uncomment if you want to run locally with Docker Postgres
+#  postgres:
+#    image: pgvector/pgvector:pg15
+#    environment:
+#      POSTGRES_DB: rag_pipeline
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: password
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#      - ./infrastructure/supabase/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+
+networks:
+  default:
+    name: rag-pipeline
+
+#volumes:
+#  postgres_data:

@@ -7,5 +7,31 @@
     "numReplicas": 1,
     "sleepApplication": false,
     "restartPolicyType": "on_failure"
+  },
+  "services": {
+    "rag-chat": {
+      "source": "services/rag-chat",
+      "dockerfile": "services/rag-chat/Dockerfile",
+      "healthcheckPath": "/health",
+      "variables": {
+        "PORT": "8000"
+      }
+    },
+    "vectorization": {
+      "source": "services/vectorization", 
+      "dockerfile": "services/vectorization/Dockerfile",
+      "healthcheckPath": "/health",
+      "variables": {
+        "PORT": "8001"
+      }
+    },
+    "insights": {
+      "source": "services/insights",
+      "dockerfile": "services/insights/Dockerfile", 
+      "healthcheckPath": "/health",
+      "variables": {
+        "PORT": "8002"
+      }
+    }
   }
 }

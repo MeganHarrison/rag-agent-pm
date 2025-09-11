@@ -1,0 +1,17 @@
+# Insights Generation Service Dependencies
+fastapi
+uvicorn[standard]
+asyncpg
+openai
+tiktoken
+pgvector
+psycopg2-binary
+pydantic
+pydantic-settings
+python-dotenv
+numpy
+pandas
+aiohttp
+requests
+sqlalchemy
+apscheduler

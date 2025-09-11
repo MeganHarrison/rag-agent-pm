@@ -1,0 +1,16 @@
+# RAG Chat Service Dependencies  
+fastapi
+uvicorn[standard]
+asyncpg
+openai
+tiktoken
+pgvector
+psycopg2-binary
+pydantic
+pydantic-ai
+pydantic-settings
+python-dotenv
+numpy
+aiohttp
+requests
+python-multipart
