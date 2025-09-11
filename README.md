@@ -66,16 +66,18 @@ python -m ingestion.ingest --documents documents/
 
 ### Command Line Interface
 
-Run the interactive CLI:
+Run the interactive test CLI:
 ```bash
-python -m cli
+python test_cli.py
 ```
 
 The CLI provides:
-- Real-time streaming responses
-- Tool execution visibility
-- Session persistence
-- User preference management
+- Interactive chat interface with the PM RAG Agent
+- Real-time responses with meeting data access
+- Error handling and safe agent execution
+- Commands: `exit`, `quit`, `clear` for navigation
+
+**Note**: The original full CLI has been moved to `.archive/cli.py` during restructuring.
 
 ### Available Commands
 
