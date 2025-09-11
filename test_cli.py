@@ -27,8 +27,9 @@ async def test_agent_query(query: str) -> Optional[str]:
         # Load settings
         settings = load_settings()
         
-        # Create dependencies
+        # Create and initialize dependencies
         deps = AgentDependencies()
+        await deps.initialize()
         
         print(f"🔍 Processing: {query}")
         print("⏳ Thinking...")
@@ -46,10 +47,17 @@ async def test_agent_query(query: str) -> Optional[str]:
         else:
             response = str(result)
             
+        # Clean up resources
+        await deps.cleanup()
         return response
         
     except Exception as e:
         print(f"❌ Error: {e}")
+        # Clean up resources on error
+        try:
+            await deps.cleanup()
+        except:
+            pass
         return None
 
 async def main():
