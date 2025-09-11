@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Development
+.git/
+.gitignore
+*.md
+README*
+docs/
+documentation/
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+ingest_output.log
+
+# Cache
+.cache/
+*.cache
+
+# Archive and backup
+.archive/
+*.bak
+*.backup
+
+# Frontend and Node.js (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
