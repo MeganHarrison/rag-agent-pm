@@ -62,11 +62,12 @@ async def stream_response(
 ) -> AsyncGenerator[str, None]:
     """Stream agent responses as Server-Sent Events."""
     
-    # Create dependencies
+    # Create and initialize dependencies
     deps = AgentDependencies(
         api_key=settings.llm_api_key,
         session_id=session_id
     )
+    await deps.initialize()
     
     # Build context from conversation history
     context = "\n".join([
@@ -120,6 +121,12 @@ Search the knowledge base to answer the user's question. Choose the appropriate 
             
     except Exception as e:
         yield f"data: {json.dumps({'type': 'error', 'data': str(e)})}\n\n"
+    finally:
+        # Clean up resources
+        try:
+            await deps.cleanup()
+        except:
+            pass
 
 
 @app.get("/")
@@ -135,11 +142,12 @@ async def chat(request: ChatRequest):
     # Generate session ID if not provided
     session_id = request.session_id or str(uuid.uuid4())
     
-    # Create dependencies
+    # Create and initialize dependencies
     deps = AgentDependencies(
         api_key=settings.llm_api_key,
         session_id=session_id
     )
+    await deps.initialize()
     
     # Build context
     context = "\n".join([
@@ -175,6 +183,12 @@ Search the knowledge base to answer the user's question. Choose the appropriate 
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        # Clean up resources
+        try:
+            await deps.cleanup()
+        except:
+            pass
 
 
 @app.post("/chat/stream")
