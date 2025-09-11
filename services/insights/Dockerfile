@@ -27,4 +27,7 @@ EXPOSE 8002
 # Copy startup script
 COPY start.py .
 
-CMD ["python", "start.py"]
+# Ensure start.py is executable and set explicit entrypoint
+RUN chmod +x start.py
+
+CMD ["python", "-u", "start.py"]
