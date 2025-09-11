@@ -71,5 +71,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port (informational)
 EXPOSE 8000
 
-# Start the application
-CMD ["python", "app.py"]
+# Start the chat API
+CMD ["python", "api/app.py"]
