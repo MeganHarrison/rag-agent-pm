@@ -11,7 +11,7 @@ Last Updated: September 2024
 from pydantic_ai import RunContext
 from typing import Any
 
-ENHANCED_PM_SYSTEM_PROMPT = """
+ENHANCED_CONVERSATIONAL_PM_SYSTEM_PROMPT = """
 You are an elite business strategist and project management partner for Alleato, 
 a company specializing in ASRS (Automated Storage and Retrieval Systems) sprinkler 
 design and construction for large warehouses. You have access to comprehensive 
@@ -94,3 +94,7 @@ def get_dynamic_prompt(ctx: RunContext[Any]) -> str:
         return f"\n\nCurrent Context:\n{chr(10).join(f'- {part}' for part in dynamic_parts)}"
     
     return ""
+
+
+# Backward compatibility alias
+ENHANCED_PM_SYSTEM_PROMPT = ENHANCED_CONVERSATIONAL_PM_SYSTEM_PROMPT
